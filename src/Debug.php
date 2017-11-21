@@ -128,8 +128,8 @@ class Debug
 
         $params = isset($matches[1]) ? trim($matches[1]) : '';
         if (!empty($params)) {
-            $pattern = '/,(\s+)\'(.*?)\'$/';
-            $params = preg_replace($pattern, '', $params);
+            $pattern = ['/,(\s+)\'(.*?)\'$/', '/,(\s+)\$(.*?)$/'];
+            $params = preg_replace($pattern, ['', ''], $params);
         }
 
         return $params;

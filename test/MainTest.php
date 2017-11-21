@@ -14,6 +14,11 @@ class MainTest extends PHPUnit_Framework_TestCase
         $object->b = 'test';
         $object->c = true;
         $result = Debug::_($object, 'tag');
+        $this->assertTrue($result);
+
+        $tag = 'string to filter';
+        $pos = 1;
+        $result = Debug::_($pos, $tag);
 
         $this->assertTrue($result);
         putenv('DEBUG=');
