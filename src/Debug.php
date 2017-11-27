@@ -152,7 +152,7 @@ class Debug
             $remoteIp = self::getRemoteIp();
             foreach (self::$remoteIps as $validIp) {
                 $validIp = preg_replace('/\.\*/', '', $validIp);
-                if (strpos($remoteIp, $ip) !== false) {
+                if (strpos($remoteIp, $validIp) !== false) {
                     return true;
                 }
             }
