@@ -121,6 +121,14 @@ class Debug
     private static function getArgs($file, $line, $tag)
     {
         $lines = file($file);
+        if (!$lines) {
+            return '';
+        }
+
+        if (!isset($lines[$line - 1])) {
+            return '';
+        }
+
         $contentLine = $lines[$line - 1];
 
         $matches = [];

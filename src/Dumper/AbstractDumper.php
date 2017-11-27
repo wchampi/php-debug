@@ -15,7 +15,7 @@ abstract class AbstractDumper implements DumperInterface
         $params = empty($trace['args']) ? '' : "$trace[args] = ";
         $tag = empty($trace['tag']) ? '' : ($isObject ? "" : ' ') . "[$trace[tag]]";
 
-        if ($isObject) {
+        if ($isObject || is_bool($value) || is_null($value)) {
             if ($value instanceof \Exception) {
                 $valueDump = $this->exceptionToString($value);
             } else {
@@ -25,11 +25,12 @@ abstract class AbstractDumper implements DumperInterface
                 ob_start();
                 var_dump($value);
                 $valueDump = ob_get_clean();
+                if (is_bool($value) || is_null($value)) {
+                    $valueDump = str_replace("\n", "", $valueDump);
+                }
 
                 ini_set('xdebug.overload_var_dump', $overloadVarDump);
             }
-        } elseif ($value === null) {
-            $valueDump = 'NULL';
         } else {
             $valueDump = $value;
         }
