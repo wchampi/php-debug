@@ -45,4 +45,26 @@ class MainTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
+    public function testArgs()
+    {
+        putenv('DEBUG=*');
+
+        $a = 1;
+        $b = 'hello';
+        $result = Debug::_(array($a, $b, 'JUM'), 'JJJJ');
+        $this->assertTrue($result);
+
+        $c = 'AJA';
+        $result = Debug::_('ok', $c);
+        $this->assertTrue($result);
+
+        $c = 'OOO';
+        $result = Debug::_("ok", $c);
+        $this->assertTrue($result);
+
+        $c = 'PPP';
+        $result = Debug::_(['ok'], $c);
+        $this->assertTrue($result);
+    }
+
 }

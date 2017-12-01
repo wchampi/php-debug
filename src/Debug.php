@@ -136,8 +136,11 @@ class Debug
 
         $params = isset($matches[1]) ? trim($matches[1]) : '';
         if (!empty($params)) {
-            $pattern = ['/,(\s+)\'(.*?)\'$/', '/,(\s+)\$(.*?)$/'];
-            $params = preg_replace($pattern, ['', ''], $params);
+            $pattern = [
+                '/,(\s+)\'([0-9A-Za-z\s_]+)\'$/',
+                '/,(\s+)\$([0-9A-Za-z_]+)$/',
+                '/^\'([0-9A-Za-z_\s]+)\'/'];
+            $params = preg_replace($pattern, ['', '', ''], $params);
         }
 
         return $params;
