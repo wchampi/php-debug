@@ -64,6 +64,15 @@ class Debug
         return true;
     }
 
+    /**
+     * @param mix $value variable to dump
+     * @param string $tag Optional tag to filter
+     */
+    public static function d($value, $tag = '')
+    {
+        return self::_($value, $tag);
+    }
+
     private static function getFilter()
     {
         $envName = self::$envName;
