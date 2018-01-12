@@ -95,12 +95,18 @@ class Debug
     private static function getTrace($value, $tag)
     {
         $trace = debug_backtrace(2);
-
         $file = $trace[1]['file'];
-        $line = $trace[1]['line'];
-        $class = isset($trace[2]['class']) ? $trace[2]['class'] : '';
-        $type = isset($trace[2]['type']) ? $trace[2]['type'] : '';
-        $function = isset($trace[2]['function']) ? $trace[2]['function'] : '';
+        $index = 1;
+        if (strpos($file, 'Debug.php') !== false) {
+            $trace = debug_backtrace(3);
+            $index = 2;
+        }
+
+        $file = $trace[$index]['file'];
+        $line = $trace[$index]['line'];
+        $class = isset($trace[$index + 1]['class']) ? $trace[$index + 1]['class'] : '';
+        $type = isset($trace[$index + 1]['type']) ? $trace[$index + 1]['type'] : '';
+        $function = isset($trace[$index + 1]['function']) ? $trace[$index + 1]['function'] : '';
 
         $trace = [
             'remoteIp' => self::getRemoteIp(),
