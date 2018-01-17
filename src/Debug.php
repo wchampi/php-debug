@@ -147,12 +147,15 @@ class Debug
         $contentLine = $lines[$line - 1];
 
         $matches = [];
-        preg_match('/::_\(([^"]*)\)/', $contentLine, $matches);
 
+        $params = preg_match('/::d\(([^"]*)\)/', $contentLine, $matches);
         $params = isset($matches[1]) ? trim($matches[1]) : '';
+
         if (empty($params)) {
-            $params = preg_match('/::d\(([^"]*)\)/', $contentLine, $matches);
+            preg_match('/::_\(([^"]*)\)/', $contentLine, $matches);
+            $params = isset($matches[1]) ? trim($matches[1]) : '';
         }
+
         if (!empty($params)) {
             $pattern = [
                 '/,(\s+)\'([0-9A-Za-z\s_]+)\'$/',
