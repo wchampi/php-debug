@@ -48,7 +48,7 @@ class Debug
     }
 
     /**
-     * @param mix $value variable to dump
+     * @param mixed $value variable to dump
      * @param string $tag Optional tag to filter
      */
     public static function _($value, $tag = '')
@@ -65,7 +65,7 @@ class Debug
     }
 
     /**
-     * @param mix $value variable to dump
+     * @param mixed $value variable to dump
      * @param string $tag Optional tag to filter
      */
     public static function d($value, $tag = '')
@@ -150,6 +150,9 @@ class Debug
         preg_match('/::_\(([^"]*)\)/', $contentLine, $matches);
 
         $params = isset($matches[1]) ? trim($matches[1]) : '';
+        if (empty($params)) {
+            $params = preg_match('/::d\(([^"]*)\)/', $contentLine, $matches);
+        }
         if (!empty($params)) {
             $pattern = [
                 '/,(\s+)\'([0-9A-Za-z\s_]+)\'$/',
