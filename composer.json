@@ -9,7 +9,7 @@
       "email": "wchampi86@gmail.com"
     }
   ],
-  "version": "0.1.3",
+  "version": "1.0.1",
   "type": "library",
   "require": {
     "php": ">=5.4"
